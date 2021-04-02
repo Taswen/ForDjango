@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Django useless files
+geckodriver.log
+db.sqlite3
