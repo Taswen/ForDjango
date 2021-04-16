@@ -1,5 +1,7 @@
 from selenium import webdriver          
+from selenium.webdriver.common.keys import Keys
 import unittest
+import time
 
 # (1) 测试类，继承自 unittest.TestCase
 class NewVisitorTest(unittest.TestCase):                            # (1)
@@ -11,9 +13,33 @@ class NewVisitorTest(unittest.TestCase):                            # (1)
         # Edith has heard about a cool new online to-do app. She goes
         # to check out its homepage
         self.browser.get("http://localhost:8000")
+
         # She notices the page title and header mention to-do lists
         self.assertIn('To-Do',self.browser.title)                   # (4)
+
+        header_text = self.browser.find_element_by_tag_name("h1").text
+        self.assertIn('To-DO',header_text)
+
+        # She is invited to enter a to-do  item straight away
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        self.assertEqual(inputbox.get_attribute('placeholder'), 'Enter a to-do item')
+
+        # She types "Buy peapcock feathers" into a text book (Edit's hoddy is tying fly-finshing lures)
+        inputbox.send_keys('Buy peacock feathers')
+
+        # When she hits enter, the page updates, and now the page lists
+        # "1.: Buy peacock feathers" as an item in a  to-do lists
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(1)
+
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_element_by_tag_name("tr")
+        self.assertTrue(any(row.text=='1:Buy peacock feathers' for row in rows))
+
+        # There is still a text box inviting her to add another item. She 
+        # enters "Use peacock feathers to make a fly" (Edith is very methodical)
         self.fail("Finish the Test")                                # (5)
+
 
 # (2) 测试主体，以test开头的任何方法都是测试方法，
 #     将由测试运行器运行。
