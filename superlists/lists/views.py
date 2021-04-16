@@ -7,5 +7,5 @@ def home_page(request):
     # Django将在应用程序目录中自动搜索名为templates的文件夹。 
     # 然后，它会根据模板的内容为您构建一个HttpResponse。
 
-    # return render(request,'home.html')
-    return HttpResponse("<html><title>To-Do lists</title></html>")
+    return render(request,'home.html')
+    # return HttpResponse("<html><title>To-Do lists</title></html>")
