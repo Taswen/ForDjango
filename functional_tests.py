@@ -42,17 +42,19 @@ class NewVisitorTest(unittest.TestCase):                            # (1)
 
 
 
-        table = self.browser.find_element_by_id('id_list_table')
-        rows = table.find_elements_by_tag_name("tr")
+        # table = self.browser.find_element_by_id('id_list_table')
+        # rows = table.find_elements_by_tag_name("tr")
         # self.assertTrue(
         #     # any() 函数用于判断给定的可迭代参数 iterable 是否全部为 False，则返回 False，如果有一个为 True，则返回 True。
         #     # 
         #     any(row.text=='1:Buy peacock feathers' for row in rows),
         #     f"New to-do item did not appear in table. Contents were:\n{table.text}"
         # )
-        self.assertIn("1: Buy peacock feathers",[row.text for row in rows])
-        self.assertIn("2: Use peacock feathers to make a fly",[row.text for row in rows])
+        # self.assertIn("1: Buy peacock feathers",[row.text for row in rows])
+        # self.assertIn("2: Use peacock feathers to make a fly",[row.text for row in rows])
 
+        self.check_for_row_in_list_table("1: Buy peacock feathers")
+        self.check_for_row_in_list_table("2: Use peacock feathers to make a fly")
         self.fail("Finish the test!")
         # There is still a text box inviting her to add another item. She 
         # enters "Use peacock feathers to make a fly" (Edith is very methodical)
@@ -63,6 +65,7 @@ class NewVisitorTest(unittest.TestCase):                            # (1)
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
         self.assertIn(row_text,[row.text for row in rows])
+
 
 
 # (2) 测试主体，以test开头的任何方法都是测试方法，
