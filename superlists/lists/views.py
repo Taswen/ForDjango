@@ -10,8 +10,11 @@ def home_page(request):
     # 然后，它会根据模板的内容为您构建一个HttpResponse。
     if request.method == 'POST':
         Item.objects.create(text=request.POST['item_text'])
-        return redirect('/')
-
-    items = Item.objects.all()
-    return render(request,'home.html',{'items':items})
+        return redirect('/lists/the-only-list-in-the-world/')
+    return render(request,'home.html')
     # return HttpResponse("<html><title>To-Do lists</title></html>")
+
+
+def view_list(request):
+    items = Item.objects.all()
+    return render(request,'list.html',{'items':items})
