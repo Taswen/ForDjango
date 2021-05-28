@@ -1,6 +1,7 @@
 from unittest.case import TestCase
 from selenium.common.exceptions import WebDriverException
 from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver          
 from selenium.webdriver.common.keys import Keys
 import unittest
@@ -14,10 +15,11 @@ MAX_WAIT = 10
 
 # (1) 测试类，可继承自 unittest.TestCase
 # 这里使用 Django的测试框架
-class NewVisitorTest(LiveServerTestCase):                            # (1)
+class NewVisitorTest(StaticLiveServerTestCase):                            # (1)
     def setUp(self):                                                # (3)
         self.browser = webdriver.Firefox()
     def tearDown(self):                                             # (3)
+        self.browser.refresh()
         self.browser.quit()
     '''
     def test_can_start_a_list_for_one_user(self):          # (2)
