@@ -66,7 +66,7 @@ class NewVisitorTest(LiveServerTestCase):                            # (1)
         # Edith wonders whether the site will remeber her list. Then she sees 
         # that the site has generated a unique URL for her -- there is some 
         # explanatory text to the effect.  
-        self.fail("Finish the test!")                                   # (5)
+        # self.fail("Finish the test!")                                   # (5)
 
         # She visits that URL - her to-do lists is still there.
         
@@ -111,8 +111,8 @@ class NewVisitorTest(LiveServerTestCase):                            # (1)
         self.assertNotEqual(francis_list_url, edith_list_url)
         # Again, there is no trace of Edith's list
         page_text = self.browser.find_element_by_tag_name('body').text
-        self.assertNoIn('Buy peacock feathers',page_text)
-        self.assertNoIn('make milk', page_text)
+        self.assertNotIn('Buy peacock feathers',page_text)
+        self.assertNotIn('make milk', page_text)
         # Satisfied, they both go back to sleep 
     
 
