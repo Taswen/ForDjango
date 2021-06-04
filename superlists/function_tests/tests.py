@@ -19,13 +19,13 @@ MAX_WAIT = 10
 class NewVisitorTest(StaticLiveServerTestCase):                            # (1)
     def setUp(self):                                                # (3)
         self.browser = webdriver.Firefox()
-        staging_server = os.environ.get('STAGING_SERVER')
+        staging_server = os.environ.get('STAGING_SERVER') # 199.255.98.133
         if staging_server:
             self.live_server_url = 'http://' + staging_server
     def tearDown(self):                                             # (3)
         self.browser.refresh()
         self.browser.quit()
-    '''
+    
     def test_can_start_a_list_for_one_user(self):          # (2)
         # Edith has heard about a cool new online to-do app. She goes
         # to check out its homepage
@@ -122,7 +122,7 @@ class NewVisitorTest(StaticLiveServerTestCase):                            # (1)
         self.assertNotIn('make milk', page_text)
         # Satisfied, they both go back to sleep 
     
-    '''
+    
     def wait_for_row_in_list_table(self,row_text):
         start_time = time.time()
         while True:
